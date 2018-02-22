@@ -25,5 +25,14 @@
   "bugs": {
     "url": "https://github.com/BNedry/mailer.js/issues"
   },
-  "homepage": "https://github.com/BNedry/mailer.js#readme"
+  "homepage": "https://github.com/BNedry/mailer.js#readme",
+  "dependencies": {
+    "handlebars": "^4.0.11",
+    "nodemailer": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/handlebars": "^4.0.36",
+    "@types/node": "^9.4.6",
+    "@types/nodemailer": "^4.3.4"
+  }
 }
