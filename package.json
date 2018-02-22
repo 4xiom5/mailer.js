@@ -1,0 +1,29 @@
+{
+  "name": "mailer.js",
+  "version": "0.0.5",
+  "description": "Send e-mail with Node.JS",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BNedry/mailer.js.git"
+  },
+  "keywords": [
+    "mail",
+    "templates",
+    "mailer",
+    "send",
+    "smtp",
+    "mailer.js",
+    "nodemail",
+    "email"
+  ],
+  "author": "Brice Theurillat <brice.theurillat@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BNedry/mailer.js/issues"
+  },
+  "homepage": "https://github.com/BNedry/mailer.js#readme"
+}
