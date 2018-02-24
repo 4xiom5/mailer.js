@@ -1,5 +1,5 @@
 {
-  "name": "mailer.js",
+  "name": "mustache-mailer",
   "version": "1.0.0",
   "description": "Send e-mail with Node.JS",
   "main": "dist/index.js",
@@ -19,7 +19,8 @@
     "smtp",
     "mailer.js",
     "nodemail",
-    "email"
+    "email",
+    "mustache"
   ],
   "author": "Brice Theurillat <brice.theurillat@outlook.com>",
   "license": "MIT",
