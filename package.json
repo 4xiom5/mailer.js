@@ -1,7 +1,7 @@
 {
   "name": "mustache-mail",
   "version": "1.0.0",
-  "description": "Send e-mail with Node.JS",
+  "description": "A powerfull tool for sending emails using templating",
   "main": "dist/index.js",
   "typings": "typings",
   "scripts": {
