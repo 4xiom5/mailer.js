@@ -33,7 +33,8 @@ export class Mailer {
     /**
      * Creates a template
      * @param name Name of the template
-     * @param template Template
+     * @param template Fields that are going to be compiled using Mustache template
+     * @param defaults Object that is going to be merged into every message object
      */
     public createTemplate(name: string, template: TemplateOptions, defaults: nodemailer.SendMailOptions) {
         this.templates[name] = {
