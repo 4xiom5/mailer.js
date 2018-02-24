@@ -1,3 +1,8 @@
+/**
+ * mailer.js
+ * Copyright (c) 2018 Brice Theurillat
+ */
+
 import * as EventEmitter from "events";
 import * as fs from "fs";
 

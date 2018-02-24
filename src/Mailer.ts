@@ -1,3 +1,8 @@
+/**
+ * mailer.js
+ * Copyright (c) 2018 Brice Theurillat
+ */
+
 import { MailTemplate, TemplateOptions } from "./MailTemplate";
 
 import * as Bluebird from "bluebird";
