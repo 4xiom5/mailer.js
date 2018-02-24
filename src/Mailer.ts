@@ -1,10 +1,13 @@
-import { MailTemplate } from "./MailTemplate";
+import { MailTemplate, TemplateOptions } from "./MailTemplate";
 
-import { Promise } from "bluebird";
+import Bluebird from "bluebird";
 import * as nodemailer from "nodemailer";
 
 interface TemplateObject {
-    [key: string]: MailTemplate;
+    [key: string]: {
+        defaults: nodemailer.SendMailOptions,
+        template: MailTemplate
+    };
 }
 
 export class Mailer {
@@ -16,35 +19,48 @@ export class Mailer {
     }
 
     /**
-     * Add a template
+     * Creates a template
      * @param name Name of the template
      * @param template Template
      */
-    public addTemplate(name: string, template: MailTemplate) {
-        this.templates[name] = template;
+    public createTemplate(name: string, template: TemplateOptions, defaults: nodemailer.SendMailOptions) {
+        this.templates[name] = {
+            template: new MailTemplate(template),
+            defaults
+        };
     }
 
     /**
-     * Send a mail using a template
+     * Sends a mail 
+     * @param mailOptions Mail Options
+     */
+    public sendMail(mailOptions: nodemailer.SendMailOptions);
+
+    /**
+     * Sends a mail using a template
+     * @param mailOptions Mail Options
      * @param templateName Name of the template
-     * @param to Recipient
      * @param context Context used to compute the template
      */
-    public sendMail(templateName: string, to: string, context: any): Promise<nodemailer.SentMessageInfo> {
-        return new Promise((resolve, reject) => {
-            const template = this.templates[templateName];
-            if (template === undefined) {
-                reject(new Error("Wrong template name"));
-            } else {
-                const mailOptions = {
-                    to,
-                    ...template.compute(context)
-                };
+    public sendMail(mailOptions: nodemailer.SendMailOptions, templateName?: string, context?: any): PromiseLike<nodemailer.SentMessageInfo> {
+        return new Bluebird<nodemailer.SentMessageInfo>((resolve, reject) => {
+            if (templateName) {
+                const template = this.templates[templateName];
+                if (template === undefined) {
+                    reject(new Error("Wrong template name"));
+                    return;
+                } else {
+                    mailOptions = {
+                        ...template.defaults,
+                        ...template.template.compute(context),
+                        ...mailOptions
+                    };
+                }
 
                 this.transporter.sendMail(mailOptions, (err: Error | null, info: nodemailer.SentMessageInfo) => {
                     err ? reject(err) : resolve(info);
                 });
             }
-        }) as any;
+        });
     }
 }

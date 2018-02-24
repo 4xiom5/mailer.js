@@ -49,7 +49,7 @@ export class MailTemplate extends EventEmitter {
                         throw err;
                     } else {
                         // Slice to remove "File" suffix
-                        (this.mailOptions as any)[option.slice(0, -4)] = handlebars.compile(data.toString());
+                        this.mailOptions[option.slice(0, -4)] = handlebars.compile(data.toString());
                         // Emit event when all the files are loaded
                         this.asyncTasksPending--;
                         if (this.asyncTasksPending === 0) {
