@@ -25,10 +25,10 @@ mailer.createTemplate("test", {
     text: "Hey {{username}} !",
     html: "<b>Hey {{username}} !</b>"
 }, {
-        from: "'Fred Foo 👻' <foo@example.com>"
-    });
+    from: "'Fred Foo 👻' <foo@example.com>"
+});
 
-// Send a simple mail using a template
+// Send an email using a template
 mailer.sendMail({
     to: "bar@example.com",
     template: {
@@ -48,7 +48,7 @@ mailer.createTemplate("test2", {
         from: "'Fred Foo 👻' <foo@example.com>"
     });
 
-// Send a simple mail using a template
+// Send an email using a template
 mailer.sendMail({
     to: "bar@example.com",
     template: {
