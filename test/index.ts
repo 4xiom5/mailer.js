@@ -1,5 +1,7 @@
 import Mailer from "../src/index";
 
+import * as path from "path"; 
+
 const mailer = new Mailer({
     host: "localhost",
     port: 1025,
@@ -28,9 +30,29 @@ mailer.createTemplate("test", {
 
 // Send a simple mail using a template
 mailer.sendMail({
-    to: "bar@example.com, baz@example.com",
+    to: "bar@example.com",
     template: {
         name: "test",
+        context: {
+            username: "Bar"
+        }
+    }
+});
+
+// Create template
+mailer.createTemplate("test2", {
+    subject: "Hello {{username}}!",
+    textFile: path.join(__dirname, "test.txt"),
+    htmlFile: path.join(__dirname, "test.html")
+}, {
+    from: "'Fred Foo 👻' <foo@example.com>"
+});
+
+// Send a simple mail using a template
+mailer.sendMail({
+    to: "bar@example.com",
+    template: {
+        name: "test2",
         context: {
             username: "Bar"
         }
