@@ -34,7 +34,7 @@ export class MailTemplate extends EventEmitter {
     private asyncTasksPending = 0;
 
     /**
-     * Create a mail template using the mustache templates language : http://mustache.github.io/
+     * Creates a mail template using the mustache templates language : http://mustache.github.io/
      * @param options Options of the template
      */
     constructor(options: TemplateOptions) {
@@ -67,7 +67,7 @@ export class MailTemplate extends EventEmitter {
     }
 
     /**
-     * Compute the template using the given context
+     * Computes the template using the given context
      * @param context Context used to compile the template
      */
     public compute(context: any): SendMailOptions {
@@ -76,5 +76,13 @@ export class MailTemplate extends EventEmitter {
             options[option] = this.mailOptions[option](context);
         }
         return options;
+    }
+
+    /** 
+     * Checks if the template is ready to be used
+     * @returns True if the template is ready to be used
+    */
+    public isReady(): boolean {
+        return this.asyncTasksPending === 0;
     }
 }
