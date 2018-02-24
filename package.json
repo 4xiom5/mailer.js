@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Send e-mail with Node.JS",
   "main": "dist/index.js",
+  "typings": "typings",
   "scripts": {
     "smtp-server": "fake-smtp-server"
   },

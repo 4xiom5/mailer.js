@@ -2,9 +2,12 @@
     "compilerOptions": {
         "target": "es6",
         "module": "commonjs",
-        "strict": true
+        "strict": true,
+        "declaration": true,
+        "declarationDir": "typings"
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "typings"
     ]
 }
