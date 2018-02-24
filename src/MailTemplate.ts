@@ -19,8 +19,6 @@ export interface TemplateOptions {
     watchHtml?: string | Buffer;
     // The path to the file containing Apple Watch specific HTML version of the message, same usage as with text and html. If set, watchHtml will be overwritten
     watchHtmlFile?: string;
-    // Index signature
-    [key: string]: string | Buffer | undefined;
 }
 
 export interface TemplateCompiledOptions {
@@ -40,11 +38,12 @@ export class MailTemplate extends EventEmitter {
     constructor(options: TemplateOptions) {
         super();
         this.emit("loading");
+        const opts: any = options;
         for (const option in options) {
             // If option is a file, read it
             if (MailTemplate.FILE_FIELDS.indexOf(option) !== -1) {
                 this.asyncTasksPending++;
-                fs.readFile(options[option] as string, (err, data) => {
+                fs.readFile(opts[option], (err, data) => {
                     if (err) {
                         throw err;
                     } else {
@@ -58,7 +57,7 @@ export class MailTemplate extends EventEmitter {
                     }
                 });
             } else {
-                this.mailOptions[option] = handlebars.compile(options[option]);
+                this.mailOptions[option] = handlebars.compile(opts[option]);
             }
         }
         if (this.asyncTasksPending === 0) {
@@ -71,7 +70,7 @@ export class MailTemplate extends EventEmitter {
      * @param context Context used to compile the template
      */
     public compute(context: any): SendMailOptions {
-        const options: TemplateOptions = {};
+        const options: any = {};
         for (const option in this.mailOptions) {
             options[option] = this.mailOptions[option](context);
         }
