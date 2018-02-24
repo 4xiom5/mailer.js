@@ -1,6 +1,6 @@
-import Mailer from "../src/index";
+import { Mailer } from "../src/index";
 
-import * as path from "path"; 
+import * as path from "path";
 
 const mailer = new Mailer({
     host: "localhost",
@@ -25,8 +25,8 @@ mailer.createTemplate("test", {
     text: "Hey {{username}} !",
     html: "<b>Hey {{username}} !</b>"
 }, {
-    from: "'Fred Foo 👻' <foo@example.com>"
-});
+        from: "'Fred Foo 👻' <foo@example.com>"
+    });
 
 // Send a simple mail using a template
 mailer.sendMail({
@@ -45,8 +45,8 @@ mailer.createTemplate("test2", {
     textFile: path.join(__dirname, "test.txt"),
     htmlFile: path.join(__dirname, "test.html")
 }, {
-    from: "'Fred Foo 👻' <foo@example.com>"
-});
+        from: "'Fred Foo 👻' <foo@example.com>"
+    });
 
 // Send a simple mail using a template
 mailer.sendMail({

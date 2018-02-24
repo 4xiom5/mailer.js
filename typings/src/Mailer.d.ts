@@ -1,3 +1,7 @@
+/**
+ * mailer.js
+ * Copyright (c) 2018 Brice Theurillat
+ */
 import { TemplateOptions } from "./MailTemplate";
 import * as nodemailer from "nodemailer";
 export interface SendMailOptions extends nodemailer.SendMailOptions {

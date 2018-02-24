@@ -3,6 +3,6 @@
  * Copyright (c) 2018 Brice Theurillat
  */
 
-import { Mailer } from "./Mailer";
+import * as Mails from "./Mailer";
 
-export default Mailer;
+export let Mailer = Mails.Mailer;

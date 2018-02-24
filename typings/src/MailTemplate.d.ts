@@ -1,5 +1,9 @@
 /// <reference types="node" />
 /// <reference types="handlebars" />
+/**
+ * mailer.js
+ * Copyright (c) 2018 Brice Theurillat
+ */
 import * as EventEmitter from "events";
 import { SendMailOptions } from "nodemailer";
 export interface TemplateOptions {
