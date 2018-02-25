@@ -1,5 +1,5 @@
 /**
- * mailer.js
+ * mustache-mail
  * Copyright (c) 2018 Brice Theurillat
  */
 
