@@ -3,13 +3,13 @@ A powerfull tool for sending emails using templating
 
 # Installation
 ```
-$ npm install --save mailer.js
+$ npm install --save mustache-mail
 ```
 
 # Usage
 ## Connection
 ```js
-import { Mailer } from "mailer.js";
+import { Mailer } from "mustache-mail";
 
 // Accept the same options as nodemailer.createTransport, https://nodemailer.com/smtp/
 const mailer = new Mailer({
