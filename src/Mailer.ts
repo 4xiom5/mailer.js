@@ -26,8 +26,8 @@ export class Mailer {
     private templates: TemplateObject = {};
     private transporter: nodemailer.Transporter;
 
-    constructor(options: any) {
-        this.transporter = nodemailer.createTransport(options);
+    constructor(options: any, defaults?: any) {
+        this.transporter = nodemailer.createTransport(options, defaults);
     }
 
     /**
