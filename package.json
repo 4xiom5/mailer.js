@@ -1,12 +1,17 @@
 {
   "name": "mustache-mail",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "A powerfull tool for sending emails using templating",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "typings": "typings",
   "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
     "smtp-server": "fake-smtp-server"
   },
+  "files": [
+    "src/**/*.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BNedry/mailer.js.git"
@@ -38,6 +43,7 @@
     "@types/handlebars": "^4.0.36",
     "@types/node": "^9.4.6",
     "@types/nodemailer": "^4.3.4",
-    "fake-smtp-server": "^0.7.6"
+    "fake-smtp-server": "^0.7.6",
+    "typescript": "^2.7.2"
   }
 }
