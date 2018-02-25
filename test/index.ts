@@ -21,11 +21,14 @@ mailer.sendMail({
 
 // Create template
 mailer.createTemplate("test", {
-    subject: "Hello {{username}}!",
-    text: "Hey {{username}} !",
-    html: "<b>Hey {{username}} !</b>"
-}, {
-    from: "'Fred Foo 👻' <foo@example.com>"
+    template: {
+        subject: "Hello {{username}}!",
+        text: "Hey {{username}} !",
+        html: "<b>Hey {{username}} !</b>"
+    },
+    defaults: {
+        from: "'Fred Foo 👻' <foo@example.com>"
+    }
 });
 
 // Send an email using a template
@@ -41,12 +44,15 @@ mailer.sendMail({
 
 // Create template
 mailer.createTemplate("test2", {
-    subject: "Hello {{username}}!",
-    textFile: path.join(__dirname, "test.txt"),
-    htmlFile: path.join(__dirname, "test.html")
-}, {
+    template: {
+        subject: "Hello {{username}}!",
+        textFile: path.join(__dirname, "test.txt"),
+        htmlFile: path.join(__dirname, "test.html")
+    },
+    defaults: {
         from: "'Fred Foo 👻' <foo@example.com>"
-    });
+    }
+});
 
 // Send an email using a template
 mailer.sendMail({
@@ -55,6 +61,38 @@ mailer.sendMail({
         name: "test2",
         context: {
             username: "Bar"
+        }
+    }
+});
+
+// Use envs
+mailer.createTemplate("Envs", {
+    envs: {
+        fr: {
+            bike: "J'ai un magnifique vélo {{color}} !"
+        },
+        en: {
+            bike: "I have a beautiful {{color}} bike!"
+        }
+    },
+    template: {
+        subject: "{{bike}}",
+        text: "{{bike}}",
+        html: "<span style='color: {{color}}'>{{bike}}</span>"
+    },
+    defaults: {
+        from: "'Fred Foo 👻' <foo@example.com>"
+    }
+});
+
+// Send an email using a template with envs
+mailer.sendMail({
+    to: "bar@example.com",
+    template: {
+        name: "Envs",
+        env: "en",
+        context: {
+            color: "red"
         }
     }
 });

@@ -9,15 +9,13 @@ import * as Bluebird from "bluebird";
 import * as nodemailer from "nodemailer";
 
 interface TemplateObject {
-    [key: string]: {
-        defaults: nodemailer.SendMailOptions,
-        template: MailTemplate
-    };
+    [key: string]: MailTemplate;
 }
 
 export interface SendMailOptions extends nodemailer.SendMailOptions {
     template?: {
         name: string,
+        env?: string,
         context: any
     }
 }
@@ -36,11 +34,8 @@ export class Mailer {
      * @param template Fields that are going to be compiled using Mustache template
      * @param defaults Object that is going to be merged into every message object
      */
-    public createTemplate(name: string, template: TemplateOptions, defaults: nodemailer.SendMailOptions) {
-        this.templates[name] = {
-            template: new MailTemplate(template),
-            defaults
-        };
+    public createTemplate(name: string, template: TemplateOptions) {
+        this.templates[name] = new MailTemplate(template);
     }
 
     /**
@@ -55,19 +50,20 @@ export class Mailer {
                     reject(new Error("Wrong template name"));
                     return;
                 } else {
-                    if (template.template.isReady()) {
+                    if (template.isReady()) {
                         this.send({
-                            ...template.defaults,
-                            ...template.template.compute((mailOptions.template as any).context),
+                            ...template.compute(mailOptions.template.context, mailOptions.template.env),
                             ...mailOptions as nodemailer.SendMailOptions
                         }, resolve, reject);
                     } else {
-                        template.template.once("ready", () => {
-                            this.send({
-                                ...template.defaults,
-                                ...template.template.compute((mailOptions.template as any).context),
-                                ...mailOptions as nodemailer.SendMailOptions
-                            }, resolve, reject);
+                        template.once("ready", () => {
+                            // Duplicated condition to avoid Typescript errors
+                            if (mailOptions.template){
+                                this.send({
+                                    ...template.compute(mailOptions.template.context, mailOptions.template.env),
+                                    ...mailOptions as nodemailer.SendMailOptions
+                                }, resolve, reject);
+                            }
                         });
                     }
                 }
