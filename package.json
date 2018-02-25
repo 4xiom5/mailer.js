@@ -1,6 +1,6 @@
 {
   "name": "mustache-mail",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A powerfull tool for sending emails using templating",
   "main": "src/index.js",
   "typings": "typings/src/index.d.ts",
@@ -10,7 +10,8 @@
     "smtp-server": "fake-smtp-server"
   },
   "files": [
-    "src/**/*.js"
+    "src/**/*.js",
+    "typings/**/*.d.ts"
   ],
   "repository": {
     "type": "git",
