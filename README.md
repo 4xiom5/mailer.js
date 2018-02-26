@@ -1,4 +1,4 @@
-# mailer.js
+# mustache-mail
 A powerfull tool for sending emails using templating
 
 # Installation
